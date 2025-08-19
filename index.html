@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CBSE Class 12 PCM Timetable & Tracker</title>
+  <meta name="description" content="A responsive study timetable and progress tracker for CBSE Class 12 PCM (Aug 2025 – Feb 2026)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Authentication check -->
+  <script>
+    // Redirect to login page if not authenticated
+    if (localStorage.getItem('loggedIn') !== 'true') {
+      window.location.href = 'login.html';
+    }
+  </script>
+  
+  <header>
+    <nav class="nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div>CBSE Class 12 — PCM</div>
+          <small class="muted">Timetable • Tracker • Revision (Aug 2025 – Feb 2026)</small>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" id="btn-export" title="Download your progress as JSON">Export</button>
+        <label class="btn" for="import-file" title="Import a saved JSON to restore progress">Import</label>
+        <input id="import-file" type="file" accept="application/json" hidden />
+        <button class="btn" id="btn-reset" title="Clear all saved progress">Reset</button>
+        <button class="btn" id="btn-logout" title="Logout from your account">Logout</button>
+        <button class="btn btn-primary" onclick="window.print()" title="Print or Save as PDF">Print</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Quotes -->
+    <section class="card quotes">
+      <h2>Motivational Quote</h2>
+      <blockquote id="quote">Loading inspiration...</blockquote>
+    </section>
+
+    <!-- SUMMARY / PROGRESS BARS -->
+    <section class="grid grid-3">
+      <div class="card">
+        <h2>Physics Progress</h2>
+        <div class="progress"><span id="prog-phy"></span></div>
+        <p class="muted"><span id="count-phy">0</span> / <span id="total-phy">0</span> chapters done</p>
+      </div>
+      <div class="card">
+        <h2>Chemistry Progress</h2>
+        <div class="progress"><span id="prog-chem"></span></div>
+        <p class="muted"><span id="count-chem">0</span> / <span id="total-chem">0</span> chapters done</p>
+      </div>
+      <div class="card">
+        <h2>Mathematics Progress</h2>
+        <div class="progress"><span id="prog-math"></span></div>
+        <p class="muted"><span id="count-math">0</span> / <span id="total-math">0</span> chapters done</p>
+      </div>
+    </section>
+
+    <!-- DAILY TIMETABLE -->
+    <section class="card">
+      <h2>Daily Timetable (Mon–Sat)</h2>
+      <p class="muted">School: <b>7:00 AM – 3:00 PM</b> • Tuition: <b>5:00 PM – 6:30 PM</b> • Morning study starts 5:45 AM</p>
+      <div style="overflow:auto">
+        <table>
+          <thead><tr><th>Time</th><th>Activity</th></tr></thead>
+          <tbody>
+            <tr><td>5:45 – 6:30 AM</td><td>Morning Revision (Formulas, Reactions, PYQs)</td></tr>
+            <tr><td>7:00 AM – 3:00 PM</td><td><b>School</b> (active notes, doubts, flashcards)</td></tr>
+            <tr><td>3:15 – 4:30 PM</td><td>Session 1 — Core Subject</td></tr>
+            <tr><td>4:30 – 5:00 PM</td><td>Snack + Homework</td></tr>
+            <tr><td>5:00 – 6:30 PM</td><td><b>Tuition</b></td></tr>
+            <tr><td>6:45 – 7:45 PM</td><td>Session 2 — Second Subject</td></tr>
+            <tr><td>7:45 – 8:15 PM</td><td>Dinner</td></tr>
+            <tr><td>8:15 – 9:15 PM</td><td>Session 3 — Maths / English</td></tr>
+            <tr><td>9:15 – 9:45 PM</td><td>Session 4 — PYQs + Revise today</td></tr>
+            <tr><td>10:00 – 10:30 PM</td><td>Formula diary + light reading</td></tr>
+            <tr><td>10:30 PM – 5:45 AM</td><td>Sleep</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- WEEKLY PLAN -->
+    <section class="card">
+      <h2>Weekly Subject–Chapter Progression</h2>
+      <p class="muted">25 weeks from Aug 2025 to early Feb 2026.</p>
+      <div style="overflow:auto">
+        <table>
+          <thead><tr><th>Weeks</th><th>Physics</th><th>Chemistry</th><th>Maths</th></tr></thead>
+          <tbody>
+            <tr><td>1–2</td><td>Electric Charges & Fields</td><td>Solutions</td><td>Relations & Functions</td></tr>
+            <tr><td>3–4</td><td>Electrostatic Potential & Capacitance</td><td>Electrochemistry</td><td>Matrices & Determinants</td></tr>
+            <!-- (continue with your plan as before) -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TRACKERS -->
+    <section class="grid grid-2">
+      <div class="card"><h2>Physics — Chapter Tracker</h2><div id="tracker-physics" class="tracker-list"></div></div>
+      <div class="card"><h2>Chemistry — Chapter Tracker</h2><div id="tracker-chem" class="tracker-list"></div></div>
+    </section>
+    <section class="card"><h2>Mathematics — Chapter Tracker</h2><div id="tracker-math" class="tracker-list"></div></section>
+
+    <!-- REVISION CALENDAR -->
+    <section class="card">
+      <h2>Monthly Revision Calendar (Jan – Feb 2026)</h2>
+      <div style="overflow:auto">
+        <table>
+          <thead><tr><th>Date Range</th><th>Focus</th></tr></thead>
+          <tbody>
+            <tr><td>Jan 1 – Jan 7</td><td>Physics (Electrostatics, Magnetism) • Chem (Solutions, Kinetics) • Maths (Relations, Matrices)</td></tr>
+            <!-- (continue as before) -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="footer">Tip: Use <span class="kbd">Export</span> to save your progress. You can Import it anytime or Print this page for your wall.</p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
